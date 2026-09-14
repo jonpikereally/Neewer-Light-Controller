@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Claude Code session data
+.claude/
+
+# Built app — the bundle skeleton (Info.plist) is tracked, the binary and signature are not
+NeewerLight.app/Contents/MacOS/
+NeewerLight.app/Contents/_CodeSignature/

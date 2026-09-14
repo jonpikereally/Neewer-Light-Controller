@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"></head><body>
+<div class="row"><div id="preview"></div></div>
+<div class="row">
+  <label>Hue</label>
+  <input type="range" name="hue" min="0" max="360" data-default="210" data-suffix="°"><output></output>
+</div>
+<div class="row">
+  <label>Saturation</label>
+  <input type="range" name="saturation" min="0" max="100" data-default="100" data-suffix="%"><output></output>
+</div>
+<div class="row">
+  <label>Brightness</label>
+  <input type="range" name="brightness" min="0" max="100" data-default="50" data-suffix="%"><output></output>
+</div>
+<p class="hint">The key shows the colour it will set. Brightness is still capped by the app’s limit.</p>
+<script src="pi.js"></script></body></html>

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "UUID": "com.jonpike.neewerdeck",
+  "Name": "Neewer Deck",
+  "Version": "1.0.0.0",
+  "Author": "Jon Pike",
+  "Description": "Control the Neewer HS60C through the Neewer Light menu bar app: power, brightness, colour temperature, colour and the 17 built-in scenes. Respects the app's brightness ceiling.",
+  "Category": "Neewer Light",
+  "CategoryIcon": "imgs/categoryIcon",
+  "Icon": "imgs/pluginIcon",
+  "CodePath": "bin/plugin.js",
+  "SDKVersion": 3,
+  "Nodejs": {
+    "Version": "20"
+  },
+  "Software": {
+    "MinimumVersion": "6.9"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "13"
+    }
+  ],
+  "Actions": [
+    {
+      "Name": "On / Off",
+      "UUID": "com.jonpike.neewerdeck.power",
+      "Icon": "imgs/power",
+      "Tooltip": "Toggle the light. Lit when the light is on, dimmed when the app can't reach it.",
+      "PropertyInspectorPath": "ui/power.html",
+      "Controllers": [ "Keypad" ],
+      "States": [
+        { "Image": "imgs/powerOff", "TitleAlignment": "bottom" },
+        { "Image": "imgs/powerOn", "TitleAlignment": "bottom" }
+      ]
+    },
+    {
+      "Name": "Brightness",
+      "UUID": "com.jonpike.neewerdeck.brightness",
+      "Icon": "imgs/brightness",
+      "Tooltip": "Rotate or press to change brightness. Stops at the app's brightness limit.",
+      "PropertyInspectorPath": "ui/brightness.html",
+      "Controllers": [ "Encoder", "Keypad" ],
+      "Encoder": {
+        "layout": "$B1",
+        "TriggerDescription": {
+          "Rotate": "Brightness",
+          "Push": "Toggle light",
+          "Touch": "Toggle light"
+        }
+      },
+      "States": [ { "Image": "imgs/brightness", "TitleAlignment": "bottom" } ]
+    },
+    {
+      "Name": "Temperature",
+      "UUID": "com.jonpike.neewerdeck.temperature",
+      "Icon": "imgs/temperature",
+      "Tooltip": "Rotate or press to change colour temperature between 2700 K and 6500 K.",
+      "PropertyInspectorPath": "ui/temperature.html",
+      "Controllers": [ "Encoder", "Keypad" ],
+      "Encoder": {
+        "layout": "$B1",
+        "TriggerDescription": {
+          "Rotate": "Colour temperature",
+          "Push": "Back to 5600 K",
+          "Touch": "Back to 5600 K"
+        }
+      },
+      "States": [ { "Image": "imgs/temperature", "TitleAlignment": "bottom" } ]
+    },
+    {
+      "Name": "Colour",
+      "UUID": "com.jonpike.neewerdeck.colour",
+      "Icon": "imgs/colour",
+      "Tooltip": "Jump straight to a colour. The key shows the colour it will set.",
+      "PropertyInspectorPath": "ui/colour.html",
+      "Controllers": [ "Keypad" ],
+      "States": [ { "Image": "imgs/colour", "TitleAlignment": "bottom" } ]
+    },
+    {
+      "Name": "Scene",
+      "UUID": "com.jonpike.neewerdeck.scene",
+      "Icon": "imgs/scene",
+      "Tooltip": "Run one of the 17 built-in effects. Lights up while that scene is active.",
+      "PropertyInspectorPath": "ui/scene.html",
+      "Controllers": [ "Keypad" ],
+      "States": [
+        { "Image": "imgs/scene", "TitleAlignment": "bottom" },
+        { "Image": "imgs/sceneActive", "TitleAlignment": "bottom" }
+      ]
+    }
+  ]
+}

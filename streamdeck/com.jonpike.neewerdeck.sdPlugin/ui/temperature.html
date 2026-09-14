@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"></head><body>
+<div class="row">
+  <label>Key press</label>
+  <select name="mode" data-default="step">
+    <option value="step">Step by</option>
+    <option value="set">Jump to</option>
+  </select>
+</div>
+<div class="row">
+  <label>Step</label>
+  <input type="number" name="step" min="-38" max="38" data-default="2">
+</div>
+<div class="row">
+  <label>Jump to</label>
+  <input type="range" name="value" min="27" max="65" data-default="56" data-suffix="00 K"><output></output>
+</div>
+<div class="row">
+  <label>Show value</label>
+  <input type="checkbox" name="showValue" data-default="true">
+</div>
+<p class="hint">Values are in hundreds of kelvin: 27 = 2700 K, 65 = 6500 K. A step of 2 moves 200 K per press. On a dial, press to snap back to 5600 K.</p>
+<script src="pi.js"></script></body></html>

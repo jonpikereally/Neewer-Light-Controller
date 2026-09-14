@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"></head><body>
+<div class="row">
+  <label>Key press</label>
+  <select name="mode" data-default="step">
+    <option value="step">Step by</option>
+    <option value="set">Jump to</option>
+  </select>
+</div>
+<div class="row">
+  <label>Step</label>
+  <input type="number" name="step" min="-100" max="100" data-default="10">
+</div>
+<div class="row">
+  <label>Jump to</label>
+  <input type="range" name="value" min="0" max="100" data-default="40" data-suffix="%"><output></output>
+</div>
+<div class="row">
+  <label>Show value</label>
+  <input type="checkbox" name="showValue" data-default="true">
+</div>
+<p class="hint">Brightness stops at the limit set in the app (50% by default), so this can’t brown out the light. On a dial, rotate to adjust and press to toggle the light.</p>
+<script src="pi.js"></script></body></html>
