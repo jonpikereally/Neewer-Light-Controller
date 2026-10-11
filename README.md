@@ -25,6 +25,8 @@ Launch it from Spotlight. macOS will ask for Bluetooth permission the first time
 - **Scene** — all 17 built-in effects (Lightning, Paparazzi, Cop Car, Candlelight, Firework…),
   each with its own parameter set
 - **Brightness limit** — a hard ceiling (50% by default) on every brightness the app will send
+- **Open at login** — checkbox at the bottom of the popover; mirrors System Settings › General ›
+  Login Items, so turning it off there unticks it here
 
 ## The brightness limit
 
@@ -98,6 +100,12 @@ Service `69400001-B5A3-F393-E0A9-E50E24DCCA99`, write to `…0002`, notify on `�
 
 The power and colour builders are verified byte-for-byte against published packet captures;
 run `./test.sh` to re-check them.
+
+## Errors
+
+| Code | Meaning | Fix |
+|---|---|---|
+| `NL-LOGIN-01` | macOS refused to add or remove the login item. | Make sure the app is running from `~/Applications` (run `install.sh`), not from Dropbox or the build folder, then toggle again. If it still fails, add or remove it by hand in System Settings › General › Login Items. |
 
 ## Build
 
