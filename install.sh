@@ -5,8 +5,10 @@
 set -e
 cd "$(dirname "$0")"
 
-./build.sh
-DEST="$HOME/Applications/Neewer Light.app"
+# The in-app updater has already built the app, so it sets SKIP_BUILD, and passes DEST
+# so the update lands wherever the running copy lives.
+[[ -n "$SKIP_BUILD" ]] || ./build.sh
+DEST="${DEST:-$HOME/Applications/Neewer Light.app}"
 rm -rf "$DEST"
 ditto NeewerLight.app "$DEST"
 codesign --force --sign - "$DEST"
