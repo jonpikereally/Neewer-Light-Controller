@@ -7,6 +7,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
     private var statusItem: NSStatusItem!
     private var popover: NSPopover!
     private let light = LightController()
+    private let updater = Updater()
     private lazy var server = ControlServer(light: light)
     private var monitor: Any?
 
@@ -21,10 +22,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
         popover = NSPopover()
         popover.behavior = .transient
         popover.delegate = self
-        popover.contentViewController = NSHostingController(rootView: ContentView(light: light))
+        popover.contentViewController = NSHostingController(rootView: ContentView(light: light, updater: updater))
 
         // Loopback control surface for the Stream Deck plugin.
         server.start()
+
+        updater.check()
     }
 
     @objc private func toggle() {
