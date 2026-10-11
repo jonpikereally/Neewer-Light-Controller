@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var light: LightController
+    @StateObject private var loginItem = LoginItem()
     @State private var showLog = false
 
     var body: some View {
@@ -297,6 +298,25 @@ struct ContentView: View {
                 .font(.system(size: 9))
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Toggle("Open at login", isOn: Binding(
+                get: { loginItem.isEnabled || loginItem.needsApproval },
+                set: { loginItem.set($0) }))
+                .toggleStyle(.checkbox)
+                .font(.system(size: 11))
+                .onAppear { loginItem.refresh() }
+            if loginItem.needsApproval {
+                Button("Allow in System Settings › Login Items") { loginItem.openSettings() }
+                    .buttonStyle(.link)
+                    .font(.system(size: 10))
+            }
+            if let error = loginItem.error {
+                Text(error)
+                    .font(.system(size: 9))
+                    .foregroundStyle(.red)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .help("Check the Errors section of the README for what this code means.")
+            }
 
             HStack {
                 Button(showLog ? "Hide log" : "Show log") { showLog.toggle() }
