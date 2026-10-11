@@ -7,3 +7,4 @@
 # Built app — the bundle skeleton (Info.plist) is tracked, the binary and signature are not
 NeewerLight.app/Contents/MacOS/
 NeewerLight.app/Contents/_CodeSignature/
+NeewerLight.app/Contents/Resources/

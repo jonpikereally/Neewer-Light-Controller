@@ -4,6 +4,7 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var light: LightController
+    @ObservedObject var updater: Updater
     @StateObject private var loginItem = LoginItem()
     @State private var showLog = false
 
@@ -318,6 +319,8 @@ struct ContentView: View {
                     .help("Check the Errors section of the README for what this code means.")
             }
 
+            updateRow
+
             HStack {
                 Button(showLog ? "Hide log" : "Show log") { showLog.toggle() }
                     .buttonStyle(.borderless)
@@ -339,6 +342,54 @@ struct ContentView: View {
                     }
                 }
                 .frame(height: 120)
+            }
+        }
+    }
+
+    // MARK: - Updates
+
+    private var updateRow: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(BuildInfo.current.summary)
+                    .font(.system(size: 10).monospacedDigit())
+                    .foregroundStyle(.secondary)
+                Spacer()
+                switch updater.state {
+                case .available(let release):
+                    Button("Install update") { updater.install(release) }
+                        .buttonStyle(.link)
+                        .font(.system(size: 11))
+                case .checking, .installing:
+                    ProgressView().controlSize(.mini)
+                default:
+                    Button("Check for updates") { updater.check() }
+                        .buttonStyle(.borderless)
+                        .font(.system(size: 11))
+                }
+            }
+            switch updater.state {
+            case .upToDate:
+                Text("You're on the latest version.")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.secondary)
+            case .available(let release):
+                Text("New: \(release.build.map { "build \($0) · " } ?? "")\(release.message)")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            case .installing(let step):
+                Text(step)
+                    .font(.system(size: 10))
+                    .foregroundStyle(.secondary)
+            case .failed(let error):
+                Text(error)
+                    .font(.system(size: 9))
+                    .foregroundStyle(.red)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .help("Check the Errors section of the README for what this code means.")
+            case .idle, .checking:
+                EmptyView()
             }
         }
     }
