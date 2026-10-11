@@ -358,14 +358,14 @@ struct ContentView: View {
                 switch updater.state {
                 case .available(let release):
                     Button("Install update") { updater.install(release) }
-                        .buttonStyle(.link)
-                        .font(.system(size: 11))
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.small)
                 case .checking, .installing:
                     ProgressView().controlSize(.mini)
                 default:
                     Button("Check for updates") { updater.check() }
-                        .buttonStyle(.borderless)
-                        .font(.system(size: 11))
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
                 }
             }
             switch updater.state {
