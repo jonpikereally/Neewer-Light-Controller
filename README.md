@@ -5,6 +5,8 @@ talks to the light directly over Bluetooth LE. No Xcode required to build.
 
 ## Install
 
+From the project folder:
+
 ```
 ./install.sh
 ```
