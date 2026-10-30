@@ -1,20 +1,14 @@
 //  ContentView.swift — the menu bar popover.
 
-import AppKit
 import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var light: LightController
     @ObservedObject var updater: Updater
+    @ObservedObject var layout: PopoverLayout
     @StateObject private var loginItem = LoginItem()
     @State private var showLog = false
     @State private var contentHeight: CGFloat = 0
-
-    // A popover taller than the space under the menu bar gets shoved up over it,
-    // so cap it at the screen and scroll the rest.
-    private var maxHeight: CGFloat {
-        (NSScreen.main?.visibleFrame.height ?? 800) - 40
-    }
 
     var body: some View {
         ScrollView {
@@ -24,7 +18,8 @@ struct ContentView: View {
                 })
         }
         .onPreferenceChange(HeightKey.self) { contentHeight = $0 }
-        .frame(width: 340, height: min(max(contentHeight, 1), maxHeight))
+        // Cap at the room under the menu bar (measured on each open) and scroll the rest.
+        .frame(width: 340, height: min(max(contentHeight, 1), layout.maxHeight))
     }
 
     private struct HeightKey: PreferenceKey {
